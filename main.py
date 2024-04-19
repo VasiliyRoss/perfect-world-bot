@@ -1,9 +1,8 @@
 """
 This is a main module for the program.
 Author: Vasiliy
-Date: 2022-04-20
-Version: 1.0
-License: MIT
+Date: 2024-04-20
+Version: 0.0.1
 """
 
 import keyboard
