@@ -23,7 +23,8 @@ def loot(i) -> None:
 
 def find_enemy(screenshot_file) -> None:
     target_status = "seeking"
-    while target_status == "seeking":
+    seeking_count = 0
+    while target_status == "seeking" and seeking_count <= 10:
         try:
             if pyautogui.locateOnScreen(screenshot_file) is not None:
                 target_status = "found"
@@ -31,8 +32,10 @@ def find_enemy(screenshot_file) -> None:
             hit_button('\t')
             time.sleep(0.5)
         print("Enemy", target_status)
+        seeking_count += 1
         if keyboard.is_pressed('q'):
             exit(0)
+    print("End of find_enemy task ")
 
 
 def drink_potion() -> None:
@@ -46,16 +49,14 @@ def fight(screenshot_file, n) -> None:
     loot(4)
     if n % 3 == 0:
         drink_potion()
-    if n % 10 == 0:
-        go_to_start()
 
 
 def fly() -> None:
     hit_button('f4')
 
 
-def take_safe_height() -> None:
-    hold_key('space', 20)
+def take_safe_height(height) -> None:
+    hold_key('space', height)
 
 
 def open_map() -> None:
@@ -69,10 +70,14 @@ def set_route(x, y) -> None:
 
 
 def go_to_start() -> None:
+    fly()
+    take_safe_height(10)
     open_map()
     destination = locate_on_screen('public/map_start.png', 0.3)
     set_route(destination[0], destination[1]+30)
     open_map()
+    time.sleep(15)
+    fly()
 
 
 if __name__ == '__main__':
