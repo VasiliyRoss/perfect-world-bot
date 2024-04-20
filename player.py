@@ -35,7 +35,6 @@ def find_enemy(screenshot_file) -> None:
         seeking_count += 1
         if keyboard.is_pressed('q'):
             exit(0)
-    print("End of find_enemy task ")
 
 
 def drink_potion() -> None:

@@ -15,7 +15,8 @@ def main() -> None:
     print("Click on the mob HP bar and press h \n")
     target = take_screenshot()
     n = 1
-    attack_timer = 200
+    print("Enter time in seconds for attack sequence(e.g 60)\n")
+    attack_timer = int(input())
     while not keyboard.is_pressed('q'):
         start_time = math.ceil(time.time())
         end_time = start_time

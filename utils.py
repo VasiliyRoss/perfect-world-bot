@@ -40,6 +40,7 @@ def hold_key(key, timer) -> None:
     time.sleep(timer)
     keyboard.release(key)
 
+
 def left_click_with_alt(x, y) -> None:
     keyboard.press('alt')
     time.sleep(0.5)
