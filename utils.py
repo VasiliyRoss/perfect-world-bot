@@ -2,12 +2,11 @@ import win32api, win32con
 import time
 import pyautogui
 import keyboard
-from player import attack, find_enemy
 
 
-def locate_on_screen(screenshot_file):
-    res = pyautogui.locateOnScreen(screenshot_file)
-    print(res)
+def locate_on_screen(screenshot_file, confidence):
+    location = pyautogui.locateOnScreen(screenshot_file, grayscale=False, confidence=confidence)
+    return location
 
 
 def take_screenshot() -> str:
@@ -29,13 +28,24 @@ def take_screenshot() -> str:
     return screenshot_file
 
 
-def click(x, y):
+def left_click(x, y) -> None:
     win32api.SetCursorPos((x, y))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(0.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
 
 
-def start(screenshot_file):
-    attack(3)
-    find_enemy(screenshot_file)
+def hold_key(key, timer) -> None:
+    keyboard.press(key)
+    time.sleep(timer)
+    keyboard.release(key)
+
+def left_click_with_alt(x, y) -> None:
+    keyboard.press('alt')
+    time.sleep(0.5)
+    left_click(x, y)
+    time.sleep(0.5)
+    keyboard.release('alt')
+
+
+
